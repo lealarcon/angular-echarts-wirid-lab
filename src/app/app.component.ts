@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import   * as echarts  from 'echarts/dist/echarts-en'
 import { NodeService } from './services/node.service';
+import { interval, timer } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'my-app',
@@ -29,8 +31,9 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit() {
-    this.InitPipe();
+    this.initPipe();
     this.historyPeople();
+    this.getNodeData();
   }
 
 config = {
@@ -56,7 +59,7 @@ labelOption = {
     }
 };
 
-InitPipe(): void {
+initPipe(): void {
     this.myChart = echarts.init((document.getElementById('pipe')) as any);
 
   const option = {
@@ -205,7 +208,16 @@ InitPipe(): void {
   }
 
 
-   
+   getNodeData(){
+      timer(5000).subscribe(()=>{
+        this._nodeServices.getDataByNodeId('rpi-camera-detection').pipe(take(1)).subscribe(data=>{
+              console.log("se hizo petición")
+        })
+      },
+      err=>{
+
+      })
+   }
 
 
 }

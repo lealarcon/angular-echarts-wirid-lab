@@ -25,6 +25,7 @@ export class HttpService {
   getHeader(): HttpHeaders {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
+      "Accept": "application/json",
       'X-Auth-Token': this.TOKEN,
     });
     return headers;
