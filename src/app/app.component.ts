@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   name = 'Angular';
 
   private myChart: any = null;
-
+  private myChart2: any = null;
 /*
   private optionsLegends = {
     legend: {
@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.InitPipe();
+    this.historyPeople();
   }
 
 config = {
@@ -31,7 +32,6 @@ config = {
     position: 'insideBottom',
     distance: 15,
 };
-
 labelOption = {
     show: true,
     position: this.config.position,
@@ -48,11 +48,11 @@ labelOption = {
     }
 };
 
-  private InitPipe(): void {
+InitPipe(): void {
     this.myChart = echarts.init((document.getElementById('pipe')) as any);
 
-    const option = {
-      color: ['#003366',  '#e5323e'],
+  const option = {
+    color: ['#003366',  '#e5323e'],
     tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -75,6 +75,12 @@ labelOption = {
             saveAsImage: {show: true}
         }
     },
+     grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
     xAxis: [
         {
             type: 'category',
@@ -91,7 +97,7 @@ labelOption = {
         {
             name: 'Male',
             type: 'bar',
-            barGap: 0,
+            barGap: 0.2,
             label: this.labelOption,
             data: [320]
         },
@@ -126,50 +132,72 @@ labelOption = {
   }
 
 
-  OnElem1Click() {
-    console.log("OnElem1Click");
-    this.myChart.dispatchAction({
-      type: 'highlight',
-      seriesIndex: 0,
-      dataIndex: 1
-    });
+  historyPeople(){
+     this.myChart2 = echarts.init((document.getElementById('history-graph')) as any);
+
+   let  option = {
+    title: {
+        text: 'History People'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            label: {
+                backgroundColor: '#6a7985'
+            }
+        }
+    },
+    legend: {
+        data: ['a', 'b', 'c', 'd', 'e']
+    },
+    toolbox: {
+       show: false,
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: [
+        {
+            type: 'category',
+            boundaryGap: false,
+            data: ['dia 1', 'dia2', 'dia3', 'dia4', 'dia7', 'dia9', 'dia80']
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value'
+        }
+    ],
+    series: [
+        {
+            name: 'Male',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {},
+            data: [120, 132, 101, 134, 90, 230, 210]
+        },
+        {
+            name: 'Female',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {},
+            data: [220, 182, 191, 234, 290, 330, 310]
+        }
+    ]
+};
+
+ this.myChart2.setOption(option);
   }
 
-  OnElem1Mouseover() {
-    console.log("OnElem1Mouseover");
-    this.myChart.dispatchAction({
-      type: 'highlight',
-      seriesIndex: 0,
-      dataIndex: 1
-    });
-  }
 
-  OnElem1Mouseout() {
-    console.log("OnElem1Mouseout");
-    this.myChart.dispatchAction({
-      type: 'downplay',
-      seriesIndex: 0,
-      dataIndex: 1
-    });
-  }
-
-  OnElem2Mouseover() {
-    console.log("OnElem2Mouseover");
-    this.myChart.dispatchAction({
-      type: 'highlight',
-      seriesIndex: 0,
-      dataIndex: 2
-    });
-  }
-
-  OnElem2Mouseout() {
-    console.log("OnElem2Mouseout");
-    this.myChart.dispatchAction({
-      type: 'downplay',
-      seriesIndex: 0,
-      dataIndex: 2
-    });
-  }
+   
 
 
 }
