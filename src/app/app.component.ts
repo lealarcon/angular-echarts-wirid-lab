@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import   * as echarts  from 'echarts/dist/echarts-en'
+import { NodeService } from './services/node.service';
 
 @Component({
   selector: 'my-app',
@@ -19,6 +20,13 @@ export class AppComponent implements OnInit {
     }
   }
   */
+
+  constructor(
+    private _nodeServices: NodeService
+  ) {
+   
+  }
+
 
   ngOnInit() {
     this.InitPipe();
