@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
 import { RouterModule } from '@angular/router';
 import {APP_BASE_HREF} from '@angular/common';
+import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
 
 @NgModule({
   imports:      [ 
     BrowserModule,
      FormsModule,
      HttpClientModule,
-      RouterModule.forRoot([])
+      RouterModule.forRoot([]),
+      DateRangePickerModule
       ],
   declarations: [ AppComponent, HelloComponent ],
   bootstrap:    [ AppComponent ],

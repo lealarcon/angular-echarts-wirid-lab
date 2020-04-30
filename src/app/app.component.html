@@ -13,7 +13,11 @@
 
   <!-- Principal Historic -->
   <div class="history-content"> 
-    <div class="date"> <input type="date" /> </div>
+    <!-- <div class="date"> <input type="date" /> 
+    
+    </div> -->
+    <ejs-daterangepicker id='daterangepicker' placeholder='Select a range' [startDate]='start' [endDate]='end'></ejs-daterangepicker>
+
     <div class="today"> 
         <div id="history-graph" style="height: 400px; width:100%" ></div> 
     </div>

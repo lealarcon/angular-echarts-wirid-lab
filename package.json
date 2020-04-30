@@ -10,12 +10,14 @@
     "@angular/platform-browser": "7.2.16",
     "@angular/platform-browser-dynamic": "7.2.16",
     "@angular/router": "7.2.16",
+    "@syncfusion/ej2-angular-calendars": "18.1.44",
+    "@syncfusion/ej2-buttons": "^18.1.43",
     "@types/node": "13.13.4",
     "core-js": "2.6.11",
     "echarts": "4.7.0",
     "moment": "2.24.0",
     "rxjs": "6.5.5",
-    "tslib": "^1.11.1",
+    "tslib": "1.11.1",
     "zone.js": "0.8.29"
   },
   "scripts": {

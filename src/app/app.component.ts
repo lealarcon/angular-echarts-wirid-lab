@@ -20,6 +20,10 @@ public totalData=[];
 public todayData=[];
 public totalNumberToday=0
 
+public start: Date = new Date (); 
+public end: Date = new Date ();
+
+
 
   constructor(
     private _nodeServices: NodeService
