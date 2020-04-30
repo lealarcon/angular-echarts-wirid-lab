@@ -120,36 +120,9 @@ labelOption = {
         
     ]
     };
-initPipe(): void {
-    this.myChart = echarts.init((document.getElementById('pipe')) as any);
-
-  
-
-    this.myChart.setOption(this.optionBar);
-
-    /*
-    this.myChart.on('legendselectchanged', function(params) {
-        console.log("legendselectchanged", params);
-        var name = params.name;
-        var slectedObject = {[name]:true};
-        console.log("slectedObject", slectedObject);
-        
-        let option = {
-            legend: {
-                selected : slectedObject
-            }
-        }
-        this.myChart.setOption(option);
-    })
-    */
-
-  }
 
 
-  historyPeople(){
-     this.myChart2 = echarts.init((document.getElementById('history-graph')) as any);
-
-   let  option = {
+optionHistory = {
     title: {
         text: 'History People'
     },
@@ -207,7 +180,39 @@ initPipe(): void {
     ]
 };
 
- this.myChart2.setOption(option);
+
+initPipe(): void {
+    this.myChart = echarts.init((document.getElementById('pipe')) as any);
+
+  
+
+    this.myChart.setOption(this.optionBar);
+
+    /*
+    this.myChart.on('legendselectchanged', function(params) {
+        console.log("legendselectchanged", params);
+        var name = params.name;
+        var slectedObject = {[name]:true};
+        console.log("slectedObject", slectedObject);
+        
+        let option = {
+            legend: {
+                selected : slectedObject
+            }
+        }
+        this.myChart.setOption(option);
+    })
+    */
+
+  }
+
+
+  historyPeople(){
+     this.myChart2 = echarts.init((document.getElementById('history-graph')) as any);
+
+
+
+ this.myChart2.setOption(this.optionHistory);
   }
 
 
@@ -216,7 +221,7 @@ initPipe(): void {
       timer(1000, 100000).subscribe(()=>{
         this._nodeServices.getDataByNodeId('rpi-camera-detection').pipe(take(1)).subscribe(data=>{
             this.totalData = data;
-              console.log("se hizo peticion")
+              // console.log("se hizo peticion")
               this.geTodayData()
         })
         //  this._nodeServices.getAllNodes().pipe(take(1)).subscribe(data=>{
@@ -263,8 +268,8 @@ let totalDays = moment(this.end).diff(moment(this.start), 'days') +1
 
 //create N array to store labels and Count
 let newXaxis = new Array(totalDays)
-let newMaleSeries = new Array(totalDays)
-let newFemaleSeries = new Array(totalDays)
+let newMaleSeries = new Array(totalDays).fill(null)
+let newFemaleSeries = new Array(totalDays).fill(null)
 
 // Get X Axis names
 newXaxis =  this.getNumberOfDays(this.start,totalDays)
@@ -272,7 +277,22 @@ newXaxis =  this.getNumberOfDays(this.start,totalDays)
 // Filter all data from range
 let tempData = this.totalData.filter(x=> moment(x.created).isBetween(startDayMoment, endDayMoment) )
 
+//get maleData per day
+newXaxis.forEach((element,index)=>{
+  let tempDayStart= moment(element).startOf('day')
+  let tempDayEnd= moment(element).endOf('day')
+newMaleSeries[index]= tempData.filter(x=>x.gender ==='male' &&  moment(x.created).isBetween(tempDayStart, tempDayEnd)  ).length 
 
+newFemaleSeries[index]= tempData.filter(x=>x.gender ==='female' &&  moment(x.created).isBetween(tempDayStart, tempDayEnd)  ).length 
+})
+
+// console.log('newMaleSeries',newMaleSeries)
+// console.log('newFemaleSeries',newFemaleSeries)
+this.optionHistory.xAxis[0].data=newXaxis
+this.optionHistory.series[0].data = newMaleSeries
+this.optionHistory.series[1].data = newFemaleSeries
+
+this.myChart2.setOption(this.optionHistory)
 
 
 }
