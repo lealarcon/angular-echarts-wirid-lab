@@ -154,7 +154,7 @@ optionHistory = {
         {
             type: 'category',
             boundaryGap: false,
-            data: ['dia 1', 'dia2', 'dia3', 'dia4', 'dia7', 'dia9', 'dia80']
+            data: ['dia 1']
         }
     ],
     yAxis: [
@@ -168,14 +168,14 @@ optionHistory = {
             type: 'line',
             stack: '总量',
             areaStyle: {},
-            data: [120, 132, 101, 134, 90, 230, 210]
+            data: [0]
         },
         {
             name: 'Female',
             type: 'line',
             stack: '总量',
             areaStyle: {},
-            data: [220, 182, 191, 234, 290, 330, 310]
+            data: [0]
         }
     ]
 };
