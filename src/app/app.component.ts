@@ -250,8 +250,23 @@ this.myChart.setOption(this.optionBar)
    }
 
 changeRangeData(event){
-console.log(event.value[0])
-console.log(event.value[1])
+// console.log(event.value[0])
+// console.log(event.value[1])
+this.start = event.value[0];
+this.end = event.value[1];
+
+// Count numbers days
+let totalDays = moment(this.end).diff(moment(this.start), 'days') +1
+
+//create N array to store labels and Count
+let newXaxis = new Array(totalDays)
+let newMaleSeries = new Array(totalDays)
+let newFemaleSeries = new Array(totalDays)
+
+newXaxis
+
+
+
 }
 
 }
