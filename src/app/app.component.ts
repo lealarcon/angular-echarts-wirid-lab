@@ -255,6 +255,9 @@ changeRangeData(event){
 this.start = event.value[0];
 this.end = event.value[1];
 
+let startDayMoment= moment(this.start).startOf('day');
+let endDayMoment = moment(this.end).endOf('day');
+
 // Count numbers days
 let totalDays = moment(this.end).diff(moment(this.start), 'days') +1
 
@@ -263,10 +266,27 @@ let newXaxis = new Array(totalDays)
 let newMaleSeries = new Array(totalDays)
 let newFemaleSeries = new Array(totalDays)
 
-newXaxis
+// Get X Axis names
+newXaxis =  this.getNumberOfDays(this.start,totalDays)
+
+// Filter all data from range
+let tempData = this.totalData.filter(x=> moment(x.created).isBetween(startDayMoment, endDayMoment) )
+
 
 
 
 }
+
+getNumberOfDays(startDay,numberDays){
+
+  let tempRange = Array.from({length: numberDays}, () => '')
+  let totalDays = []
+  
+  tempRange.forEach(async (element,index)=>{
+  await  totalDays.push( moment(startDay).startOf('day').add(index,'days').format('YYYY-MM-DD') ) 
+  })
+  return totalDays
+}
+
 
 }
