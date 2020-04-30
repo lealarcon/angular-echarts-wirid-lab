@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import   * as echarts  from 'echarts/dist/echarts-en'
+import   * as echarts  from 'echarts'
+// import   * as echarts  from 'echarts/dist/echarts-en' 
 import { NodeService } from './services/node.service';
 import { interval, timer } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -211,7 +212,8 @@ initPipe(): void {
 
 
    getNodeData(){
-      timer(1000, 20000).subscribe(()=>{
+     //loop infinito donde se realiza una peticion cada minuto 
+      timer(1000, 100000).subscribe(()=>{
         this._nodeServices.getDataByNodeId('rpi-camera-detection').pipe(take(1)).subscribe(data=>{
             this.totalData = data;
               console.log("se hizo peticion")
@@ -247,5 +249,9 @@ this.myChart.setOption(this.optionBar)
 
    }
 
+changeRangeData(event){
+console.log(event.value[0])
+console.log(event.value[1])
+}
 
 }

@@ -16,7 +16,7 @@
     <!-- <div class="date"> <input type="date" /> 
     
     </div> -->
-    <ejs-daterangepicker id='daterangepicker' placeholder='Select a range' [startDate]='start' [endDate]='end'></ejs-daterangepicker>
+    <ejs-daterangepicker id='daterangepicker' placeholder='Select a range' [startDate]='start' (change)="changeRangeData($event)" [endDate]='end'></ejs-daterangepicker>
 
     <div class="today"> 
         <div id="history-graph" style="height: 400px; width:100%" ></div> 
