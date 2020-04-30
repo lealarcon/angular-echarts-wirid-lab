@@ -123,6 +123,7 @@ labelOption = {
 
 
 optionHistory = {
+   color: ['#003366',  '#e5323e'],
     title: {
         text: 'History People'
     },
