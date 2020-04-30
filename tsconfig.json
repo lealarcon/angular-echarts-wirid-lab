@@ -19,6 +19,7 @@
   "angularCompilerOptions": {
     "emitDecoratorMetadata":true,
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "strictInjectionParameters": true,
+      "typeRoots": [ "../node_modules/@types" ]
   }
 }

@@ -4,6 +4,7 @@ import   * as echarts  from 'echarts/dist/echarts-en'
 import { NodeService } from './services/node.service';
 import { interval, timer } from 'rxjs';
 import { take } from 'rxjs/operators';
+const moment = require('moment');
 
 @Component({
   selector: 'my-app',
@@ -15,13 +16,10 @@ export class AppComponent implements OnInit {
 
   private myChart: any = null;
   private myChart2: any = null;
-/*
-  private optionsLegends = {
-    legend: {
-      selected: ["elem1", "elem2", "elem3"]
-    }
-  }
-  */
+public totalData=[];
+public todayData=[];
+public totalNumberToday=0
+
 
   constructor(
     private _nodeServices: NodeService
@@ -58,11 +56,7 @@ labelOption = {
         }
     }
 };
-
-initPipe(): void {
-    this.myChart = echarts.init((document.getElementById('pipe')) as any);
-
-  const option = {
+ optionBar = {
     color: ['#003366',  '#e5323e'],
     tooltip: {
         trigger: 'axis',
@@ -110,19 +104,23 @@ initPipe(): void {
             type: 'bar',
             barGap: 0.2,
             label: this.labelOption,
-            data: [320]
+            data: [0]
         },
         {
             name: 'Female',
             type: 'bar',
             label: this.labelOption,
-            data: [220]
+            data: [0]
         }
         
     ]
     };
+initPipe(): void {
+    this.myChart = echarts.init((document.getElementById('pipe')) as any);
 
-    this.myChart.setOption(option);
+  
+
+    this.myChart.setOption(this.optionBar);
 
     /*
     this.myChart.on('legendselectchanged', function(params) {
@@ -209,9 +207,11 @@ initPipe(): void {
 
 
    getNodeData(){
-      timer(1000, 50000).subscribe(()=>{
+      timer(1000, 20000).subscribe(()=>{
         this._nodeServices.getDataByNodeId('rpi-camera-detection').pipe(take(1)).subscribe(data=>{
-              console.log("se hizo petición")
+            this.totalData = data;
+              console.log("se hizo peticion")
+              this.geTodayData()
         })
         //  this._nodeServices.getAllNodes().pipe(take(1)).subscribe(data=>{
         //       console.log("se hizo petición")
@@ -220,6 +220,27 @@ initPipe(): void {
       err=>{
 
       })
+   }
+
+   geTodayData(){
+    
+    let startToday =  moment().startOf('day');
+    let endToday =  moment().endOf('day');
+  
+    this.todayData= this.totalData.filter(x=> moment(x.created).isBetween(startToday, endToday) )
+
+let totalMale = this.optionBar.series[0].data[0] = this.todayData.filter(x=>x.gender ==='male' ).length
+let totalFemale = this.optionBar.series[1].data[0] = this.todayData.filter(x=>x.gender ==='female' ).length
+
+this.totalNumberToday = totalMale + totalFemale
+// console.log("startToday",startToday)
+// console.log("endToday",endToday)
+// console.log("todayData",this.todayData)  
+// console.log("totalMen",totalMen)
+// console.log("totalFemale",totalFemale)
+// console.log("----------------------------------")
+this.myChart.setOption(this.optionBar)
+
    }
 
 
