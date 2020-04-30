@@ -209,10 +209,13 @@ initPipe(): void {
 
 
    getNodeData(){
-      timer(5000).subscribe(()=>{
+      timer(1000, 50000).subscribe(()=>{
         this._nodeServices.getDataByNodeId('rpi-camera-detection').pipe(take(1)).subscribe(data=>{
               console.log("se hizo petición")
         })
+        //  this._nodeServices.getAllNodes().pipe(take(1)).subscribe(data=>{
+        //       console.log("se hizo petición")
+        // })
       },
       err=>{
 

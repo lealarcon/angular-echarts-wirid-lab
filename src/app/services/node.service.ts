@@ -27,6 +27,15 @@ export class NodeService {
     return this._httpService.httpGet(url);
   }
 
+// Funciones Propias
+  getAllNodes( filter?: string): Observable<any[]> {
+    let url: string = `/MyNodes`;
+    if (filter)
+      url = `/MyNodes?filter=${filter}`;
+    return this._httpService.httpGet(url);
+  }
+
+
   
 
 
