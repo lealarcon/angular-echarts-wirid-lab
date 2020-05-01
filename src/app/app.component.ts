@@ -109,7 +109,10 @@ labelOption = {
             type: 'bar',
             barGap: 0.2,
             label: this.labelOption,
-            data: [0]
+            data: [0],
+            backgroundStyle: {
+                color: 'rgba(220, 220, 220, 0.8)'
+            }
         },
         {
             name: 'Female',
@@ -125,7 +128,7 @@ labelOption = {
 optionHistory = {
    color: ['#003366',  '#e5323e'],
     title: {
-        text: 'History People'
+      //  text: 'History People'
     },
     tooltip: {
         trigger: 'axis',

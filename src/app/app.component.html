@@ -1,12 +1,15 @@
 
 <div class="app-content">
-  <div class="title"> IoT People Counter</div>
-
+  <div class="header-app">
+   <div class="title"> IoT People Counter</div>
+  <div class="title-today"> Today {{totalNumberToday}} </div> 
+  </div>
+ 
   <!-- Principal Data -->
   <div class="main-content"> 
-    <div class="video"> <img src="/video_feed">  </div>
+    <div class="video"> <img width="400px" src="http://localhost/video_feed">  </div>
     <div class="today"> 
-         <div class="title-today"> Today {{totalNumberToday}} </div> 
+        
         <div id="pipe" style="height: 400px; max-width: 400px" ></div> 
     </div>
   </div>
@@ -16,9 +19,13 @@
     <!-- <div class="date"> <input type="date" /> 
     
     </div> -->
-    <ejs-daterangepicker id='daterangepicker' placeholder='Select a range' [startDate]='start' (change)="changeRangeData($event)" [endDate]='end'></ejs-daterangepicker>
+      <div class="title"> Historical
+      </div>
+    <div class="date-picker">
 
-    <div class="today"> 
+    <ejs-daterangepicker id='daterangepicker' placeholder='Select a range' [startDate]='start' (change)="changeRangeData($event)" [endDate]='end'></ejs-daterangepicker>
+</div>
+    <div class="graph"> 
         <div id="history-graph" style="height: 400px; width:100%" ></div> 
     </div>
   </div>
