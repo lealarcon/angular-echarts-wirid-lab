@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
 export class HttpService {
 
   public urlHttp: string = 'https://api.wiridlab.site/api';
-  private TOKEN = 'iJQG4Ltd6Y5fvlnpQJH-FrbqGo7mOp3R'
+  private TOKEN = 'xxxxxxxxx'
   constructor(
     private http: HttpClient
   ) {
